@@ -1,31 +1,227 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Il sito di Leo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio di Kevin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #140507;
+            --card-bg: rgba(45, 10, 15, 0.8);
+            --text-main: #fff5f6;
+            --text-muted: #e2b8be;
+            --accent: #ff2a4b;
+            --border-glass: 1px solid rgba(255, 77, 106, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at top right, rgba(220, 20, 60, 0.28), transparent 45%),
+                radial-gradient(circle at bottom left, rgba(139, 0, 0, 0.32), transparent 45%);
+            padding: 2rem 5%;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        /* Intestazione e Menu */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-bottom: 2rem;
+            border-bottom: var(--border-glass);
+            margin-bottom: 2.5rem;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff3355 0%, #ff99a8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            background: linear-gradient(135deg, #e11d48 0%, #9f1239 100%);
+            padding: 0.6rem 1.3rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(225, 29, 72, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 42, 75, 0.6);
+        }
+
+        /* Schede (Card) */
+        .card {
+            background: var(--card-bg);
+            border: var(--border-glass);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        h2 {
+            color: #ffccd3;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 22px;
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Lista puntata stilizzata */
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            color: var(--text-main);
+            padding: 0.6rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 1.05rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        ul li:last-child {
+            border-bottom: none;
+        }
+
+        ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Tabella moderna */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem;
+            background: rgba(255, 42, 75, 0.18);
+            color: #ffccd3;
+            font-weight: 700;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        td {
+            padding: 1rem;
+            color: var(--text-main);
+            border-bottom: 1px solid rgba(255, 77, 106, 0.15);
+        }
+
+        tr:hover td {
+            background: rgba(255, 42, 75, 0.08);
+        }
+    </style>
 </head>
 <body>
-<h1>Ciao, sono kevin </h1>
-<nav>
-<a href="index.html">Chi sono</a>
-<a href="diario.html">Diario dello stage</a>
-</nav>
-<h2>Chi sono</h2>
-<p>Frequento la terza di informatica. Mi piace fare programmi.</p>
-<h2>Cosa so fare</h2>
-<ul>
-<li>Scrivo programmi con Github </li>
-<li>Salvo i miei lavori su GitHub</li>
-<li>Smonto e rimonto un computer</li>
-</ul>
-<h2>Le mie competenze</h2>
-<table>
-<tr><th>Competenza</th><th>Cosa ho fatto</th></tr>
-<tr><td>Programmare</td><td>Un gioco Mastermind in Lazarus</td></tr>
-<tr><td>Lavorare in squadra</td><td>Una chat con client e server</td
-></tr>
-<tr><td>Usare Git</td><td>Un repository su GitHub</td></tr>
-</table>
+
+    <div class="container">
+        <!-- INTESTAZIONE -->
+        <header>
+            <h1>Ciao, sono Kevin</h1>
+            <nav>
+                <a href="#chi-sono">Chi sono</a>
+                <a href="stage.html">Diario dello stage</a>
+            </nav>
+        </header>
+
+        <!-- CHI SONO -->
+        <div id="chi-sono" class="card">
+            <h2>Chi sono</h2>
+            <p>Frequento la terza di informatica. Mi piace fare programmi.</p>
+        </div>
+
+        <!-- COSA SO FARE -->
+        <div class="card">
+            <h2>Cosa so fare</h2>
+            <ul>
+                <li>Scrivo programmi con GitHub</li>
+                <li>Salvo i miei lavori su GitHub</li>
+                <li>Smonto e rimonto un computer</li>
+            </ul>
+        </div>
+
+        <!-- LE MIE COMPETENZE -->
+        <div class="card">
+            <h2>Le mie competenze</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Competenza</th>
+                        <th>Cosa ho fatto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Programmare</td>
+                        <td>Un gioco Mastermind in Lazarus</td>
+                    </tr>
+                    <tr>
+                        <td>Lavorare in squadra</td>
+                        <td>Una chat con client e server</td>
+                    </tr>
+                    <tr>
+                        <td>Usare Git</td>
+                        <td>Un repository su GitHub</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </body>
 </html>
