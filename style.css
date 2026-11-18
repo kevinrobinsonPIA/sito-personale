@@ -1,53 +1,181 @@
-/* style.css - uguale per tutti - Versione 1.0 */
-/* FALLO TUO: cambia solo questi tre colori */
+/* =========================================
+   1. VARIABILI (Tema Rosso Scuro Ad Alto Contrasto)
+   ========================================= */
 :root {
-  --sfondo: #dff1ff;
-  --titolo: #12467a;
-  --bottone: #0b57d0;
+    --bg-color: #140507;               /* Sfondo rosso scurissimo (quasi nero) */
+    --card-bg: rgba(45, 10, 15, 0.75); /* Sfondo card bordeaux semi-trasparente */
+    --text-main: #fff5f6;              /* Bianco con leggerissimo riflesso rosa (massima leggibilità) */
+    --text-muted: #e2b8be;             /* Rosa pallido/grigio per i testi secondari */
+    --accent: #ff2a4b;                 /* Rosso acceso neon per dettagli e hover */
+    --accent-hover: #d91636;           /* Rosso intenso al passaggio del mouse */
+    --gradient: linear-gradient(135deg, #ff3355 0%, #ff8598 100%); /* Gradiente luminoso per titoli e bottoni */
+    --border-glass: 1px solid rgba(255, 77, 106, 0.2); /* Bordo sottile rosso rubino */
+}
+
+/* =========================================
+   2. RESET E BASE
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
-  background: var(--sfondo);
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 16px;
-  color: #14202b;
-  line-height: 1.5;
-  font-size: 18px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    /* Bagliore rosso scuro agli angoli dello schermo */
+    background-image: radial-gradient(circle at top right, rgba(220, 20, 60, 0.22), transparent 45%),
+                      radial-gradient(circle at bottom left, rgba(139, 0, 0, 0.25), transparent 45%);
 }
 
-h1 { color: var(--titolo); text-align: center; }
-h2 { color: var(--titolo); }
-
-.menu {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-  margin: 12px 0 20px;
-}
-.menu a {
-  background: var(--bottone);
-  color: white;
-  text-decoration: none;
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-weight: bold;
-}
-.menu a:hover { opacity: 0.85; }
-
-.scheda {
-  background: white;
-  max-width: 640px;
-  margin: 16px auto;
-  padding: 16px 20px;
-  border-radius: 12px;
+/* =========================================
+   3. TIPOGRAFIA E TITOLI IN TEMA
+   ========================================= */
+h1, h2, h3 {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--text-main);
 }
 
-.scheda img { max-width: 100%; border-radius: 8px; }
+h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    /* Leggera ombra per staccare ancora di più il titolo dallo sfondo */
+    filter: drop-shadow(0 2px 10px rgba(255, 42, 75, 0.2));
+}
 
-table { border-collapse: collapse; width: 100%; }
-th, td { border: 1px solid #c9d3e0; padding: 6px 8px; text-align: left; }
-th { background: #e9f0f8; }
+h2 {
+    color: #ffccd3; /* Rosa chiarissimo molto elegante per i sottotitoli */
+    margin-bottom: 0.8rem;
+}
 
-.piede { text-align: center; font-size: 14px; color: #4a5968; margin-top: 24px; }
+p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Evidenziazione del testo quando lo selezioni col mouse */
+::selection {
+    background: var(--accent);
+    color: #ffffff;
+}
+
+/* =========================================
+   4. NAVBAR EFFETTO VETRO BORDEAUX
+   ========================================= */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(20, 5, 7, 0.85);
+    border-bottom: var(--border-glass);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: var(--text-main);
+    text-decoration: none;
+    margin-left: 2rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--accent);
+}
+
+/* =========================================
+   5. BOTTONI CON BAGLIORE RUBINO
+   ========================================= */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #e11d48 0%, #9f1239 100%);
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(225, 29, 72, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 42, 75, 0.65);
+}
+
+/* =========================================
+   6. CARD E CONTENITORI
+   ========================================= */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 5%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: var(--card-bg);
+    border: var(--border-glass);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 42, 75, 0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================
+   7. IMMAGINI E INPUT
+   ========================================= */
+img {
+    max-width: 100%;
+    border-radius: 12px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: rgba(20, 5, 7, 0.7);
+    border: var(--border-glass);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input::placeholder, textarea::placeholder {
+    color: rgba(226, 184, 190, 0.5);
+}
+
+input:focus, textarea:focus {
+    border-color: var(--accent);
+}
