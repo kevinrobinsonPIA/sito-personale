@@ -36,9 +36,6 @@
                 radial-gradient(circle at 15% 85%, rgba(159, 18, 57, 0.18), transparent 50%);
         }
 
-        /* =========================================
-           NAVBAR IN TEMA CON LA HOME
-           ========================================= */
         nav {
             position: sticky;
             top: 0;
@@ -91,9 +88,6 @@
             box-shadow: 0 4px 15px rgba(255, 42, 75, 0.3);
         }
 
-        /* =========================================
-           CONTENUTO STAGE
-           ========================================= */
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -101,7 +95,7 @@
         }
 
         .theme-header {
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
         }
 
         .theme-tag {
@@ -146,13 +140,6 @@
             border-radius: 16px;
             padding: 2rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            transition: transform 0.25s, border-color 0.25s, background 0.25s;
-        }
-
-        .stage-card:hover {
-            transform: translateY(-4px);
-            background: var(--surface-hover);
-            border-color: var(--accent);
         }
 
         .card-badge {
@@ -170,35 +157,42 @@
         .stage-card h2 {
             font-size: 1.4rem;
             color: #ffccd3;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.8rem;
         }
 
-        .stage-card p {
+        /* AREE SCRIVIBILI DIRETTAMENTE SULLA PAGINA */
+        textarea {
+            width: 100%;
+            min-height: 110px;
+            background: rgba(13, 3, 5, 0.75);
+            border: 1px solid rgba(255, 42, 75, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
             color: var(--text-main);
+            font-family: 'Inter', sans-serif;
             font-size: 1.05rem;
+            line-height: 1.6;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
-        .stage-card ul {
-            list-style: none;
-            margin-top: 0.5rem;
+        textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 42, 75, 0.2);
         }
 
-        .stage-card ul li {
-            color: var(--text-main);
-            padding: 0.4rem 0 0.4rem 1.4rem;
-            position: relative;
-            font-size: 1.05rem;
+        textarea::placeholder {
+            color: rgba(214, 168, 175, 0.45);
         }
 
-        .stage-card ul li::before {
-            content: "▹";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
+        .actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
         }
 
-        /* Bottone Presenze */
         .btn-primary {
             display: inline-block;
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
@@ -207,6 +201,9 @@
             border-radius: 10px;
             text-decoration: none;
             font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
             box-shadow: 0 4px 20px rgba(255, 42, 75, 0.35);
             transition: transform 0.2s, box-shadow 0.2s;
         }
@@ -216,7 +213,30 @@
             box-shadow: 0 6px 25px rgba(255, 42, 75, 0.55);
         }
 
-        /* FOOTER */
+        .btn-secondary {
+            display: inline-block;
+            background: var(--surface);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 0.9rem 1.8rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-hover);
+        }
+
+        .saved-msg {
+            color: #4ade80;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
         footer {
             background: var(--bg-dark);
             border-top: 1px solid var(--border);
@@ -225,15 +245,10 @@
             color: var(--text-muted);
             font-size: 0.9rem;
         }
-
-        @media (max-width: 768px) {
-            .nav-links { gap: 1rem; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
     <nav>
         <a href="index.html" class="brand">&lt;Kevin<span>Dev</span>/&gt;</a>
         <div class="nav-links">
@@ -245,47 +260,63 @@
         </div>
     </nav>
 
-    <!-- CONTENUTO PRINCIPALE -->
     <div class="container">
         <div class="theme-header">
             <span class="theme-tag">// Esperienza lavorativa</span>
             <h1>Il mio <span>stage</span></h1>
-            <p class="subtitle">Dettagli sull'azienda, sulle mansioni svolte e sugli obiettivi formativi.</p>
+            <p class="subtitle">Clicca nei riquadri qui sotto per scrivere direttamente i tuoi appunti e salva.</p>
         </div>
 
         <div class="stage-grid">
-            <!-- SCHEDA 1: DOVE FAI LO STAGE -->
             <div class="stage-card">
                 <span class="card-badge">01 // AZIENDA</span>
                 <h2>Dove faccio lo stage</h2>
-                <p>SCRIVI QUI IL NOME DELL'AZIENDA E CHE LAVORO FA.</p>
+                <textarea id="azienda" placeholder="Clicca qui e scrivi il nome dell'azienda e che lavoro fa..."></textarea>
             </div>
 
-            <!-- SCHEDA 2: CHE COSA FAI -->
             <div class="stage-card">
                 <span class="card-badge">02 // MANSIONI</span>
                 <h2>Che cosa faccio</h2>
-                <p>SCRIVI QUI LE COSE CHE FAI NELLO STAGE, CON PAROLE TUE.</p>
+                <textarea id="mansioni" placeholder="Clicca qui e scrivi le cose che fai nello stage, con parole tue..."></textarea>
             </div>
 
-            <!-- SCHEDA 3: CHE COSA VUOI IMPARARE -->
             <div class="stage-card">
                 <span class="card-badge">03 // OBIETTIVI</span>
                 <h2>Che cosa voglio imparare</h2>
-                <ul>
-                    <li>SCRIVI QUI UNA COSA CHE VUOI IMPARARE</li>
-                    <li>SCRIVI QUI UN'ALTRA COSA CHE VUOI IMPARARE</li>
-                </ul>
+                <textarea id="obiettivi" placeholder="Clicca qui e scrivi cosa vuoi imparare..."></textarea>
             </div>
         </div>
 
-        <a href="presenze.html" class="btn-primary">Vai alle mie presenze, giorno per giorno →</a>
+        <div class="actions">
+            <button onclick="salvaTesto()" class="btn-primary">Salva appunti</button>
+            <a href="presenze.html" class="btn-secondary">Vai alle mie presenze →</a>
+            <span id="msg" class="saved-msg">✔ Appunti salvati!</span>
+        </div>
     </div>
 
-    <!-- FOOTER -->
     <footer>
         <p>Sito creato da me • <strong>3INF</strong> • 2026</p>
     </footer>
+
+    <script>
+        // Carica automaticamente quello che hai scritto in precedenza
+        window.onload = function() {
+            if(localStorage.getItem('stage_azienda')) document.getElementById('azienda').value = localStorage.getItem('stage_azienda');
+            if(localStorage.getItem('stage_mansioni')) document.getElementById('mansioni').value = localStorage.getItem('stage_mansioni');
+            if(localStorage.getItem('stage_obiettivi')) document.getElementById('obiettivi').value = localStorage.getItem('stage_obiettivi');
+        };
+
+        // Salva nel browser quando premi il pulsante
+        function salvaTesto() {
+            localStorage.setItem('stage_azienda', document.getElementById('azienda').value);
+            localStorage.setItem('stage_mansioni', document.getElementById('mansioni').value);
+            localStorage.setItem('stage_obiettivi', document.getElementById('obiettivi').value);
+            
+            const msg = document.getElementById('msg');
+            msg.style.opacity = '1';
+            setTimeout(() => { msg.style.opacity = '0'; }, 2500);
+        }
+    </script>
 
 </body>
 </html>
