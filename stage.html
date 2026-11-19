@@ -1,32 +1,275 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Il mio stage</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevin | Il mio stage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* STESSI IDENTICI COLORI DELLA HOME */
+        :root {
+            --bg-dark: #0d0305;
+            --bg-alt: #140508;
+            --surface: #1f080d;
+            --surface-hover: #2b0b12;
+            --text-main: #fff5f6;
+            --text-muted: #d6a8af;
+            --accent: #ff2a4b;
+            --accent-dark: #9f1239;
+            --border: rgba(255, 42, 75, 0.22);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 85% 20%, rgba(255, 42, 75, 0.12), transparent 45%),
+                radial-gradient(circle at 15% 80%, rgba(159, 18, 57, 0.15), transparent 45%);
+        }
+
+        /* NAVBAR IDENTICA ALLA HOME */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(13, 3, 5, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .brand span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .nav-links a.active {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: #fff;
+            padding: 0.55rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 42, 75, 0.3);
+        }
+
+        /* CONTENUTO IN TEMA CON LA HOME */
+        .container { max-width: 1100px; margin: 0 auto; padding: 5rem 8%; }
+        .theme-header { margin-bottom: 2.5rem; }
+
+        .theme-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
+        h1 span {
+            background: linear-gradient(135deg, #ff3355, #ff99a8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle { color: var(--text-muted); font-size: 1.15rem; }
+
+        .stage-grid { display: grid; grid-template-columns: 1fr; gap: 1.8rem; margin-bottom: 2.5rem; }
+
+        .stage-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: transform 0.25s, border-color 0.25s;
+        }
+
+        .stage-card:hover {
+            border-color: var(--accent);
+        }
+
+        .area-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--accent);
+            background: rgba(255, 42, 75, 0.14);
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .stage-card h2 { font-size: 1.25rem; color: #ffccd3; margin-bottom: 0.8rem; }
+
+        textarea {
+            width: 100%;
+            min-height: 110px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        textarea:focus {
+            border-color: var(--accent);
+            background: var(--bg-dark);
+        }
+
+        textarea::placeholder { color: var(--text-muted); opacity: 0.5; }
+
+        .actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: #fff;
+            padding: 0.85rem 1.8rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 20px rgba(255, 42, 75, 0.35);
+            transition: transform 0.2s;
+        }
+
+        .btn-primary:hover { transform: translateY(-2px); }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 0.85rem 1.8rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover { background: var(--surface-hover); }
+
+        .saved-msg { color: #ff99a8; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; opacity: 0; transition: opacity 0.3s; }
+
+        footer {
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 8%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
-  <nav class="menu">
-    <a href="index.html">Chi sono</a>
-    <a href="passione.html">Hobby</a>
-    <a href="competenze.html">Competenze</a>
-    <a href="diario.html">Il mio stage</a>
-    <a href="presenze.html">Presenze</a>
-  </nav>
-  <h1>Il mio stage</h1>
-  <div class="scheda">
-    <h2>Dove faccio lo stage</h2>
-    <p>Scrivi qui il nome dell&#39;azienda e che lavoro fa.</p>
-    <h2>Che cosa faccio</h2>
-    <p>Scrivi qui le cose che fai nello stage, con parole tue.</p>
-    <h2>Che cosa voglio imparare</h2>
-    <ul>
-      <li>Scrivi qui una cosa</li>
-      <li>Scrivi qui un&#39;altra cosa</li>
-    </ul>
-    <p><a href="presenze.html">Vai alle mie presenze, giorno per giorno</a></p>
-  </div>
-  <p class="piede">Sito creato da me - 3INF - 2026</p>
+
+    <nav>
+        <a href="index.html" class="brand">&lt;Kevin<span>Dev</span>/&gt;</a>
+        <div class="nav-links">
+            <a href="index.html#chi-sono">Chi sono</a>
+            <a href="index.html#hobby">Hobby</a>
+            <a href="index.html#competenze">Competenze</a>
+            <a href="stage.html" class="active">Il mio stage</a>
+            <a href="presenze.html">Presenze</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="theme-header">
+            <span class="theme-tag">04 // Esperienza lavorativa</span>
+            <h1>Il mio <span>stage</span></h1>
+            <p class="subtitle">Clicca nei riquadri qui sotto per scrivere direttamente i tuoi appunti e salva.</p>
+        </div>
+
+        <div class="stage-grid">
+            <div class="stage-card">
+                <span class="area-badge">AZIENDA</span>
+                <h2>Dove faccio lo stage</h2>
+                <textarea id="azienda" placeholder="Scrivi qui il nome dell'azienda e che lavoro fa..."></textarea>
+            </div>
+
+            <div class="stage-card">
+                <span class="area-badge">MANSIONI</span>
+                <h2>Che cosa faccio</h2>
+                <textarea id="mansioni" placeholder="Scrivi qui le cose che fai nello stage, con parole tue..."></textarea>
+            </div>
+
+            <div class="stage-card">
+                <span class="area-badge">OBIETTIVI</span>
+                <h2>Che cosa voglio imparare</h2>
+                <textarea id="obiettivi" placeholder="Scrivi qui cosa vuoi imparare..."></textarea>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button onclick="salvaTesto()" class="btn-primary">Salva appunti</button>
+            <a href="presenze.html" class="btn-secondary">Vai alle mie presenze →</a>
+            <span id="msg" class="saved-msg">✔ Appunti salvati!</span>
+        </div>
+    </div>
+
+    <footer>
+        <p>Sito creato da me • <strong>Kevin</strong> • 3INF • 2026</p>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            if(localStorage.getItem('stage_azienda')) document.getElementById('azienda').value = localStorage.getItem('stage_azienda');
+            if(localStorage.getItem('stage_mansioni')) document.getElementById('mansioni').value = localStorage.getItem('stage_mansioni');
+            if(localStorage.getItem('stage_obiettivi')) document.getElementById('obiettivi').value = localStorage.getItem('stage_obiettivi');
+        };
+
+        function salvaTesto() {
+            localStorage.setItem('stage_azienda', document.getElementById('azienda').value);
+            localStorage.setItem('stage_mansioni', document.getElementById('mansioni').value);
+            localStorage.setItem('stage_obiettivi', document.getElementById('obiettivi').value);
+            const msg = document.getElementById('msg');
+            msg.style.opacity = '1';
+            setTimeout(() => { msg.style.opacity = '0'; }, 2500);
+        }
+    </script>
+
 </body>
 </html>
